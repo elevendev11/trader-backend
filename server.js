@@ -76,13 +76,13 @@ wss.on("connection", function connection(ws) {
   });
 });
 
-// Handle HTTP Upgrade Requests for WebSocket
-const server = app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
-
 server.on("upgrade", (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, (ws) => {
     wss.emit("connection", ws, request);
   });
+});
+
+// Handle HTTP Upgrade Requests for WebSocket
+const server = app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
